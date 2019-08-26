@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ys.mapservice.mapper.TUserMapper">
+<resultMap id="findPassword" type="com.ys.mapservice.domain.entity.TUser">
+    <result column="u_password" property="UPassword"/>
+</resultMap>
+    <select id="findPasswordByName" resultMap="findPassword">
+        SELECT tu.u_password
+        FROM t_user tu WHERE tu.u_name=#{name}
+    </select>
+
+
+
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="uId">
+    INSERT INTO t_user(u_name,u_password) VALUE(#{user.UName},#{user.UPassword})
+    </insert>
+</mapper>

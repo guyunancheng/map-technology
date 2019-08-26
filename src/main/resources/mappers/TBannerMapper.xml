@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ys.mapservice.mapper.TBannerMapper">
+    <resultMap id="findAllBanner" type="com.ys.mapservice.domain.entity.TBanner">
+        <id property="bannerId" column="banner_id"/>
+        <result property="bannerImg" column="banner_img"/>
+        <result property="bannerTitle" column="banner_title"/>
+        <result property="bannerUrl" column="banner_url"/>
+    </resultMap>
+    <select id="findAllBanner" resultMap="findAllBanner">
+        SELECT tb.banner_id,tb.banner_img,tb.banner_title,tb.banner_url
+        FROM t_banner tb
+    </select>
+</mapper>

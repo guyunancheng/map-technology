@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ys.mapservice.mapper.TServeMapper">
+    <resultMap id="findCaseById" type="com.ys.mapservice.domain.vo.TServeVo">
+        <id property="serveId" column="serve_id"/>
+        <result property="serveName" column="serve_name"/>
+        <result property="serveTitle" column="serve_title"/>
+        <result property="servePrice" column="serve_price"/>
+        <collection property="caseList" resultMap="com.ys.mapservice.mapper.TCaseMapper.findCase"/>
+
+
+    </resultMap>
+    <select id="findCaseByServeId" resultMap="findCaseById">
+        SELECT ts.serve_id,ts.serve_name,ts.serve_title,ts.serve_price,tc.case_id, tc.case_title, tc.case_dec
+        FROM
+        t_serve ts LEFT JOIN t_case tc ON ts.serve_id = tc.serve_id WHERE ts.serve_id=#{serveId}
+    </select>
+</mapper>
