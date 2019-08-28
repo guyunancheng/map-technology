@@ -6,7 +6,7 @@
 </resultMap>
     <select id="findPasswordByName" resultMap="findPassword">
         SELECT tu.u_password
-        FROM t_user tu WHERE tu.u_name=#{name}
+        FROM t_user tu WHERE tu.u_name=#{param1} AND tu.u_password=#{param2}
     </select>
 
 
@@ -14,4 +14,23 @@
     <insert id="insertUser" useGeneratedKeys="true" keyProperty="uId">
     INSERT INTO t_user(u_name,u_password) VALUE(#{user.UName},#{user.UPassword})
     </insert>
+
+
+    <select id="findUserByUser" resultMap="findPassword">
+        SELECT tu.u_name,tu.u_password
+        FROM t_user tu WHERE tu.u_name=#{user.UName}
+    </select>
+
+
+
+    <resultMap id="findTimeBar" type="com.ys.mapservice.domain.vo.TUserVo">
+        <id property="UId" column="u_id"/>
+        <result property="UName" column="u_name"/>
+        <collection property="TTimelines" resultMap="com.ys.mapservice.mapper.TTimeMapper.BaseResultMap"/>
+    </resultMap>
+
+    <select id="findTimeByUserId" resultMap="findTimeBar">
+        SELECT tu.u_name,tu.u_id,tt.time_id,tt.time_bar,tt.serve_id  FROM
+        t_user tu LEFT JOIN t_time tt ON tu.u_id = tt.u_id WHERE tu.u_id=#{userId}
+    </select>
 </mapper>
